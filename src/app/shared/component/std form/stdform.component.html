@@ -1,0 +1,180 @@
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="text-center">
+            Student Form
+        </h3>
+    </div>
+    <div class="card-body">
+        <form #addInfo="ngForm" (ngSubmit)="onAddInfo()">
+            <div class="form-group">
+                <label for="fname">First Name* :-</label>
+                <input type="text"
+                        class="form-control"
+                        name="fname"
+                        ngModel
+                        #fname="ngModel"
+                        required
+                        pattern="[a-zA-Z]+"
+                        minlength="4"
+                        maxlength="8">
+                
+                <span class="text-danger"
+                    *ngIf="fname.invalid && fname.touched && fname.hasError('required')">
+                        First Name is required....
+                </span>
+
+                <ng-container *ngIf="fname.dirty">
+                    <span class="text-danger"
+                        *ngIf="fname.hasError('minlength')">
+                        Minimum Length of First name should be {{fname.errors?.['minlength'].requiredLength}}
+                        and actual length is {{fname.errors?.['minlength'].actualLength}}
+                    </span>
+
+                    <span class="text-danger"
+                        *ngIf="fname.hasError('pattern')">
+                        First Name Should not includes Special Char. & Number !!!
+                    </span>
+                </ng-container>
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Last Name* :-</label>
+                <input type="text"
+                        class="form-control"
+                        name="lname"
+                        ngModel
+                        #lname="ngModel"
+                        required
+                        pattern="[a-zA-Z]+"
+                        minlength="2"
+                        maxlength="10">
+
+                <span class="text-danger"
+                    *ngIf="lname.invalid && lname.touched && lname.hasError('required')">
+                            Last Name is required....
+                </span>
+                <ng-container *ngIf="lname.dirty">
+                    <span class="text-danger"
+                        *ngIf="lname.hasError('minlength')">
+                        Minimum Length of Last name should be {{lname.errors?.['minlength'].requiredLength}}
+                        and actual length is {{lname.errors?.['minlength'].actualLength}}
+                    </span>
+
+                    <span class="text-danger"
+                        *ngIf="lname.hasError('pattern')">
+                        Last Name Should not includes Special Char. & Number !!!
+                    </span>
+                </ng-container>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email ID* :-</label>
+                <input type="text"
+                        class="form-control"
+                        name="email"
+                        ngModel
+                        #email="ngModel"
+                        required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+                <span class="text-danger"
+                    *ngIf="email.touched && lname.hasError('required')">
+                        Email Id is required...
+                </span>
+                <span class="text-danger"
+                        *ngIf="email.dirty && email.hasError('pattern')">
+                        Invalid Email Id !!!
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact* :-</label>
+                <input type="text"
+                        class="form-control"
+                        name="contact"
+                        ngModel
+                        #contact="ngModel"
+                        required
+                        pattern="^\d*$"
+                        minlength="10"
+                        maxlength="10">
+                
+                <span class="text-danger"
+                        *ngIf="contact.dirty && contact.hasError('pattern')">
+                        Invalid Contact Number !!!
+                </span>
+                <span class="text-danger"
+                        *ngIf="contact.dirty && contact.hasError('minlength')">
+                        Minimum Length of Contact Number should be {{contact.errors?.['minlength'].requiredLength}}
+                        and actual length is {{contact.errors?.['minlength'].actualLength}}
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender :-</label>
+                <div class="ml-4" *ngFor="let g of gender">
+                    <label [for]="g.gen">
+                        <input type="radio" ngModel name="gender" [id]="g.id" [value]="g.gen">
+                        {{g.gen}}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="secQue">Favourite Book / Place:-</label>
+                <select name="secQue" 
+                        id="secQue"
+                        class="form-control"
+                        ngModel
+                        required
+                        #secQue="ngModel">
+                    
+                    <option value="favBook">Favourite Book</option>
+                    <option value="favPlace">Favourite Place</option>
+                </select>
+                <span class="text-danger"
+                    *ngIf="secQue.touched && secQue.hasError('required')">
+                        Secret Question is required...
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="ans">Answer* :-</label>
+                <input type="text"
+                        class="form-control"
+                        name="ans"
+                        required
+                        ngModel
+                        #ans="ngModel">
+                        
+                <span class="text-danger"
+                    *ngIf="ans.touched && ans.hasError('required')">
+                        Answer is required...
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="checkbox">
+                    <input type="checkbox" 
+                        name="isAcc" 
+                        id="isAcc"
+                        required
+                        ngModel
+                        #checkBox="ngModel">
+                    All Information is Varified !!!
+                </label>
+
+                <span class="text-danger"
+                    *ngIf="checkBox.touched && checkBox.hasError('required')">
+                    Is required...
+                </span>
+            </div>
+
+            <button type="submit" class="btn btn-outline-success btn-block" [disabled]="addInfo.invalid">
+                Add Info
+            </button>
+        </form>
+    </div>
+</div>
